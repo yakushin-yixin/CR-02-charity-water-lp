@@ -1,47 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charity: Water Landing Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@400;600;700&display=swap');
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Proxima Nova', Arial, sans-serif;
+      height: 100%;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 100px;
+      display: flex;
+      justify-content: flex-start;
+      gap: 20px;
+      z-index: 3;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background: #ffc907;
+      transition: width 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: #ffc907;
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      background: url('https://via.placeholder.com/1600x900') no-repeat center center/cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      color: white;
+      padding: 20px;
+      position: relative;
+      box-sizing: border-box;
+      transition: background 0.5s ease-in-out;
+    }
+
+    .hero:hover {
+      background-size: 105%;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      width: 100%;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hero-content:hover {
+      transform: translateY(-5px) scale(1.01);
+      opacity: 0.97;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      line-height: 1.4;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+
+    .hero h1:hover {
+      color: #ffc907;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      letter-spacing: 0.3px;
+      font-weight: 400;
+      transition: opacity 0.3s ease;
+    }
+
+    .hero p:hover {
+      opacity: 0.85;
+    }
+
+    .donation-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .donation-form input {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .donation-form input:focus {
+      outline: none;
+      box-shadow: 0 0 8px rgba(255, 201, 7, 0.8);
+    }
+
+    .donation-form button {
+      background-color: #ffc907;
+      border: none;
+      border-radius: 5px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .donation-form button:hover {
+      background-color: #e0b306;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      font-weight: 600;
+    }
+
+    .logo:hover {
+      opacity: 0.85;
+      transform: scale(1.05);
+    }
+
+    .logo img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .give-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #ffc907;
+      color: black;
+      border: none;
+      padding: 12px 20px;
+      font-weight: 600;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      z-index: 3;
+    }
+
+    .give-btn:hover {
+      background: #e0b306;
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    @media (min-width: 600px) {
+      .hero {
+        padding: 50px;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+      }
+
+      .donation-form {
+        flex-direction: row;
+      }
+
+      .donation-form input {
+        border-radius: 5px 0 0 5px;
+        margin-bottom: 0;
+      }
+
+      .donation-form button {
+        border-radius: 0 5px 5px 0;
+        margin-left: -1px; /* seamless join */
+      }
+
+      .logo {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
-
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
-
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
-        </div>
-    </section>
-
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+  <div class="hero">
+    <div class="overlay"></div>
+    <nav class="navbar">
+      <a href="#who">Who We Are</a>
+      <a href="#mission">Mission</a>
+      <a href="#projects">Current Projects</a>
+    </nav>
+    <button class="give-btn">GIVE</button>
+    <div class="hero-content">
+      <h1>Your Donation, 100% to the Cause. Seriously</h1>
+      <p>We handle the overhead separately. You fund clean water directly, proving that every dollar creates a wave of change.</p>
+      <form class="donation-form">
+        <input type="text" placeholder="Choose an amount!">
+        <button type="submit">Donate</button>
+      </form>
+    </div>
+    <div class="logo">
+      <img src="https://via.placeholder.com/30" alt="Charity Water Logo">
+      <span>charity: water</span>
+    </div>
+  </div>
 </body>
 </html>
+
